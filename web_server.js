@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+var session = require('express-session');
 var router = require('./router/main')(app);
 
 app.set('views', __dirname + '/views');
