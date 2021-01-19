@@ -1,16 +1,8 @@
 <html>
     <head>
-        <title><%= title %></title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <% include ./header.ejs %> 
     </head>
     <body>
-        <h1>Loop it!</h1>
-        <u1>
-            <% for(var i=0; i<length; i++) { %>
-                <li>
-                    <%= "Loop" + i %>
-                </li>
-            <% } %>
-        </u1>
+        <% include ./body.ejs %> 
     </body>
 </html>
