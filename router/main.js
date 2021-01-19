@@ -124,7 +124,7 @@ module.exports = function(app, fs)
         var sess;
         sess = req.session;
 
-        fs.readFile(___dirname + "/../data/user.json", "utf8", function(err, data) {
+        fs.readFile(__dirname + "/../data/user.json", "utf8", function(err, data) {
             var users = JSON.parse(data);
             var username = req.params.username;
             var password = req.params.password;
