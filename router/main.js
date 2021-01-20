@@ -10,7 +10,7 @@ module.exports = function(app, fs)
             sess.name = "Name"
             sess.username = "userName"
         }
-
+        
         res.render('index', {
             title: "MY HOMEPAGE",
             length: 5,
