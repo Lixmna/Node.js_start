@@ -14,7 +14,7 @@ var server = app.listen(3002,function () {
 })
 
 app.use (cors());
-app.use('/api', api);
+// app.use('/api', api);
 
 app.use (express.static('public'));
 app.use(bodyParser.json());
