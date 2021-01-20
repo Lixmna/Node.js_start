@@ -4,6 +4,12 @@ module.exports = function(app, fs)
 {
     app.get('/',function(req,res) {
         var sess = req.session;
+        
+        if(sess.name == null)
+        {
+            sess.name = "Name"
+            sess.username = "userName"
+        }
 
         res.render('index', {
             title: "MY HOMEPAGE",
