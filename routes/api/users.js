@@ -70,7 +70,7 @@ router.post('/login', (req, res) => {
 
                         // JWT 토큰 생성
                         // 7일 동안 유효
-                        jwt.sign(payload, keys.secretOrKey, { expiresIn: '7d' });
+                        const token = jwt.sign(payload, keys.secretOrKey, { expiresIn: '7d' });
 
                         user.token = token;
                         user.save((error, user) => {
