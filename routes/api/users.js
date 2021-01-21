@@ -107,6 +107,7 @@ router.post('/login', (req, res) => {
                             if (error) {
                                 return res.status(400).json({ error: "something wrong"});
                             }
+                            console.log("여기들어왓는데 왜 쿠키가 안만들어짐?")
                             return res
                                 .cookie("x_auth", user.token, { 
                                 maxAge: 1000*60*60*24*7,
