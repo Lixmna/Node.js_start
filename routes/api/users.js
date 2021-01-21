@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     res.send("패스포트 모듈 테스트");
 });
 
-authrouter.post('/register', (req, res) => {
+authRouter.post('/register', (req, res) => {
     User.findOne({ email: req.body.email })
         .then(user => {
             if(user) {
@@ -138,7 +138,7 @@ app.post("/api/users/auth", jwtMiddleware, async (req, res) => {
 });
 
 authRouter.post("/logout", jwtMiddleware, (req, res) => {
-     
+
     return res.cookie("x_auth", "").json({ logoutSuccess: true });
 });
 
