@@ -25,8 +25,8 @@ mongoose
 require('./config/passport')(passport);
 
 // 라우팅 파트
-app.use('./api/users', users);
+app.use('/api/users', users);
 
-app.listen(3000, (req, res) => {
+app.listen(5000, (req, res) => {
     console.log("서버 실행중..");
 });
