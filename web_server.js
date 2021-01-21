@@ -7,10 +7,22 @@ var connectRedis = require('connect-redis');
 var RedisStore = connectRedis(session);
 var sessionSecret = '@#@$MYSIGN#@$#$';
 
+var redisClinet = redis.createClient(port, host);
+
+var redisConnectionResult = redisClinet.auth(password, err => {
+
+if (err) console.log(err, " 에러 발생했습니다");
+
+});
+
+console.log("redis 연결 결과는? - ", redisConnectionResult);
+
+
 var sess = {
     resave : false,
     saveUninitialized: false,
     secret: sessionSecret,
+    client: redisClinet,
     name: 'sessionId',
     cookie: {
         httpOnly: true,
