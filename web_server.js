@@ -25,7 +25,9 @@ const client = redis.createClient({
     host: process.env.REDIS_HOST,
     port: process.env.REDIS_PORT,
     password: process.env.REDIS_PASSWORD,
-    key : key,
+    prefix: "session:",
+    db : 0,
+    client : redis,
     logError: true
 });
 
