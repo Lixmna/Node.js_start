@@ -6,10 +6,12 @@ var passport = require('passport');
 // 초기화 파트
 const app = express();
 const users = require('./routes/api/users');
+const cookieParser = require('cookie-passer');
 
 // 미들웨어 설정 파트
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use(passport.initialize());
 

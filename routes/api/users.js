@@ -131,7 +131,7 @@ const jwtMiddleware = (req, res, next) => {
   });
 };
 
-app.post("/api/users/auth", jwtMiddleware, async (req, res) => {
+router.post("/auth", jwtMiddleware, async (req, res) => {
     res.status(200).json({
       isAuth: true,
       id: req.user.id,
