@@ -7,7 +7,7 @@ const client = redis.createClient({
     logError: true
 });
 
-var redisClient = redis.createClient({port},{host});
+// var redisClient = redis.createClient({port},{host});
 
 client.auth({password}, function (err) {
     if (err) throw err;
