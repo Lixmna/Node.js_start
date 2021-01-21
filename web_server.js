@@ -32,10 +32,10 @@ const sessionOption = { resave: false, saveUninitialized: false, secret: process
 
 
 var fs = require("fs")
-
+/*
 var redis = require('redis');
 var client = redis.createClient();      
-
+*/
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
