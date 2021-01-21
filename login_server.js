@@ -5,7 +5,7 @@ var passport = require('passport');
 
 // 초기화 파트
 const app = express();
-const users = require('./api/users');
+const users = require('./routes/api/users');
 
 // 미들웨어 설정 파트
 app.use(bodyParser.urlencoded({ extended: false }));
