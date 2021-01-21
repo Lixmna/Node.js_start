@@ -8,7 +8,7 @@ module.exports = function(app, fs)
 
     app.get('/',function(req,res) {
         var sess = req.session;
-
+        req.session.key = '123';
         if(sess.name == null)
         {
             sess.name = "Name"
