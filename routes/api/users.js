@@ -157,12 +157,12 @@ const jwtMiddleware = (req, res, next) => {
 };
 
 router.post("/auth", jwtMiddleware, async (req, res) => {
+    res.send(req.cookie);
     res.status(200).json({
       isAuth: true,
       id: req.user.id,
       name: req.user.name,
     });
-    res.send(cookie);
 });
 
 router.post("/logout", jwtMiddleware, (req, res) => {
