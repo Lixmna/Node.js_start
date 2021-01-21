@@ -1,28 +1,14 @@
 const { json } = require("body-parser");
-
-var redis = require('./redis.js');
-
-
+const { response } = require("express");
+var session = require('express-session');
 
 module.exports = function(app, fs)
 {
-    app.use(session({
-        store: new RedisStore({
-            client: redis,
-            host: 'localhost',
-            port: 6379,
-            prefix : "session:",
-            db : 0,
-            saveUninitialized: false,
-            resave: false
-        }),
-        secret: '@#@$MYSIGN#@$#$',
-        cookie: { maxAge: 2592000000 }
-    }));
+    
 
     app.get('/',function(req,res) {
         var sess = req.session;
-        
+
         if(sess.name == null)
         {
             sess.name = "Name"
@@ -35,6 +21,13 @@ module.exports = function(app, fs)
             name: sess.name,
             username: sess.username
         })
+    });
+
+    app.get('/sessioncheck', function(req, res) {
+        if(req.session.key){
+            console.log('Ok Session Vaild...(' + req.session.key + ')');
+            response.send('session vaild (current login)');
+        }
     });
 
     app.get('/list', function (req, res) {
@@ -165,6 +158,8 @@ module.exports = function(app, fs)
                 result["success"] = 1;
                 sess.username = username;
                 sess.name = users[username]["name"];
+                req.session.username = username;
+                req.session.name = users[username]["name"];
                 res.json(result);
             }else{
                 result["success"] = 0;
