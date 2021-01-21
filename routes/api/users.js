@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../../models/User');
 
+const jwt = require('jsonwebtoken');
+const keys = require('../../config/keys');
 
 router.get('/', (req, res) => {
     res.send("패스포트 모듈 테스트");
@@ -38,5 +40,45 @@ router.post('/register', (req, res) => {
             }
         })
 })
+
+router.post('/login', (req, res) => {
+
+    const email = req.body.email;
+    const password = req.body.password;
+
+    // email로 회원 찾기
+    User.findOne({email})
+        .then(user => {
+            if(!user){
+                errors.email = "해당하는 회원이 존재하지 않습니다.";
+                return res.status(400).json(errors);
+            }
+
+            // 패스워드 확인
+            bcrypt.compare(password, user.password)
+                .then(isMatch => {
+                    if(isMatch) {
+                        // 회원 비밀번호가 일치할 때
+                        // JWT PAYLOAD 생성
+                        const payload = {
+                            id: user.id,
+                            name: user.name
+                        };
+
+                        // JWT 토큰 생성
+                        // 1시간 동안 유효
+                        jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+                            res.json({
+                                success: true,
+                                token: 'Bearer ' + token
+                            })
+                        });
+                    } else {
+                        errors.password = "패스워드가 일치하지 않습니다.";
+                        return res.status(400).json(errors);
+                    }
+                });
+        })
+});
 
 module.exports = router;
