@@ -2,7 +2,7 @@ const express = require("express");
 var router = express.Router();
 
 const User = require("../models/User");
-const bcrypt = require("bcryptjs");
+const bcryptjs = require("bcryptjs");
 const saltRounds = 10;
 
 authRouter.post("/login", (req, res) => {
@@ -45,7 +45,7 @@ authRouter.post("/register", async (req, res) => {
   }
 
   // 솔트 생성 및 해쉬화 진행
-  bcrypt.genSalt(saltRounds, (err, salt) => {
+  bcryptjs.genSalt(saltRounds, (err, salt) => {
     // 솔트 생성 실패시
     if (err)
       return res.status(500).json({
@@ -54,7 +54,7 @@ authRouter.post("/register", async (req, res) => {
       });
     // salt 생성에 성공시 hash 진행
 
-    bcrypt.hash(password, salt, async (err, hash) => {
+    bcryptjs.hash(password, salt, async (err, hash) => {
       if (err)
         return res.status(500).json({
           registerSuccess: false,
