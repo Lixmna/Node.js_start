@@ -31,6 +31,7 @@ const client = redis.createClient({
 const sessionOption = { resave: false,
      saveUninitialized: false,
       secret: process.env.COOKIE_SECRET,
+        saveUninitialized: true,
        cookie: { httpOnly: true, secure: false },
         store: new RedisStore({ client }) 
 };
@@ -55,12 +56,12 @@ app.use (cors());
 app.use (express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-
+/*
 app.use(session({
     secret: '@#@$MYSIGN#@$#$',
     resave: false,
     saveUninitialized: true
-}));
+}));*/
 
 app.use(session({sessionOption}));
 
