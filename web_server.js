@@ -6,6 +6,7 @@ var session = require('express-session');
 var connectRedis = require('connect-redis');
 var RedisStore = connectRedis(session);
 var sessionSecret = '@#@$MYSIGN#@$#$';
+
 var sess = {
     resave : false,
     saveUninitialized: false,
@@ -40,11 +41,13 @@ app.use (express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
+/*
 app.use(session({
     secret: '@#@$MYSIGN#@$#$',
     resave: false,
     saveUninitialized: true
 }));
+*/
 
 app.use(session({sess}));
 
