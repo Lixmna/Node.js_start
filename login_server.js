@@ -16,9 +16,10 @@ app.use(passport.initialize());
 // 몽고DB 설정 파트
 const db = require('./config/keys').mongoURI;
 
-mongoose.connect(db, { useNewUrlParser: true })
-mongoose.then(() => console.log("몽고 DB가 연결되었습니다."))
-mongoose.catch(err => console.log(err));
+mongoose
+    .connect(db, { useNewUrlParser: true })
+    .then(() => console.log("몽고 DB가 연결되었습니다."))
+    .catch(err => console.log(err));
 
 // 패스포트 모듈 설정
 require('./config/passport')(passport);
