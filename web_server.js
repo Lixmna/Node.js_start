@@ -8,7 +8,7 @@ var RedisStore = connectRedis(session);
 var sessionSecret = '@#@$MYSIGN#@$#$';
 
 const redis = require('redis');
-
+/*
 var sess = {
     resave : false,
     saveUninitialized: false,
@@ -19,7 +19,7 @@ var sess = {
         secure: false,
     },
     store: new RedisStore({url: 'http://192.168.0.38:6379', logErrors: true}),
-};
+};*/
 
 const client = redis.createClient({
     host: process.env.REDIS_HOST,
