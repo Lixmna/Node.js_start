@@ -3,7 +3,26 @@ var app = express();
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var connectRedis = require('connect-redis');
+var RedisStore = connectRedis(session);
+var sess = {
+    resave : false,
+    saveUninitialized: false,
+    secret: sessionSecret,
+    name: 'sessionId',
+    cookie: {
+        httpOnly: true,
+        secure: false,
+    },
+    store: new RedisStore({url: 'http://192.168.0.38:6379', logErrors: true}),
+};
+
+
+
 var fs = require("fs")
+
+var redis = require('redis');
+var client = redis.createClient();      
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -26,5 +45,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use(session({sess}));
+
+client.on('error', function (err) {
+    console.log('Error ' + err);
+});
 
 var router = require('./router/main')(app, fs);
