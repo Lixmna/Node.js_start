@@ -5,7 +5,7 @@ var passport = require('passport');
 
 // 초기화 파트
 const app = express();
-const users = require('./routes/api/users');
+const users = require('./api/users');
 
 // 미들웨어 설정 파트
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +25,7 @@ mongoose
 require('./config/passport')(passport);
 
 // 라우팅 파트
-app.use('./routes/api/users', users);
+app.use('.api/users', users);
 
 app.listen(3000, (req, res) => {
     console.log("서버 실행중..");

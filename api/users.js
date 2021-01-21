@@ -3,7 +3,7 @@ var router = express.Router();
 
 const bcrypt = require('bcryptjs');
 
-const User = require('../../models/User');
+const User = require('../models/User');
 
 router.get('/', (req, res) => {
     res.send("패스포트 모듈 테스트");
