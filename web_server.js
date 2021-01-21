@@ -28,7 +28,12 @@ const client = redis.createClient({
     logError: true
 });
 
-const sessionOption = { resave: false, saveUninitialized: false, secret: process.env.COOKIE_SECRET, cookie: { httpOnly: true, secure: false }, store: new RedisStore({ client }) };
+const sessionOption = { resave: false,
+     saveUninitialized: false,
+      secret: process.env.COOKIE_SECRET,
+       cookie: { httpOnly: true, secure: false },
+        store: new RedisStore({ client }) 
+};
 
 
 var fs = require("fs")
