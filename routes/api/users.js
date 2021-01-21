@@ -93,6 +93,10 @@ router.get('/current', passport.authenticate('jwt', { session: false}), (req, re
 
 router.post('/logout', passport.authenticate('jwt', {session: false}), (req, res) => {
     req.logout();
+    var decoded = jwt.decode(token);
+
+    console.log(decoded.payload);
+    
     res.json({
         success: true
     });
