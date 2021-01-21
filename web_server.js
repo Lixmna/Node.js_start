@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var connectRedis = require('connect-redis');
 var RedisStore = connectRedis(session);
+var sessionSecret = '@#@$MYSIGN#@$#$';
 var sess = {
     resave : false,
     saveUninitialized: false,
