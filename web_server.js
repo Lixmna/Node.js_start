@@ -7,7 +7,7 @@ var connectRedis = require('connect-redis');
 var RedisStore = connectRedis(session);
 var sessionSecret = '@#@$MYSIGN#@$#$';
 
-
+const redis = require('redis');
 
 var sess = {
     resave : false,
@@ -21,6 +21,14 @@ var sess = {
     store: new RedisStore({url: 'http://192.168.0.38:6379', logErrors: true}),
 };
 
+const client = redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD,
+    logError: true
+});
+
+const sessionOption = { resave: false, saveUninitialized: false, secret: process.env.COOKIE_SECRET, cookie: { httpOnly: true, secure: false }, store: new RedisStore({ client }) };
 
 
 var fs = require("fs")
@@ -51,7 +59,7 @@ app.use(session({
 }));
 */
 
-app.use(session({sess}));
+app.use(session({sessionOption}));
 
 client.on('error', function (err) {
     console.log('Error ' + err);
