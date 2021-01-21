@@ -1,14 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-const app = express();
-
 const bcrypt = require('bcryptjs');
 
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
-
-const cookieParser = require("cookie-parser");
 
 const keys = require('../../config/keys');
 
@@ -151,7 +147,7 @@ const jwtMiddleware = (req, res, next) => {
           .json({ isAuth: false, error: "token에 해당하는 유저가 없습니다" });
       }
       if (user) {
-        // 🚨 다음에 사용할 수 있도록 req 객체에 token과 user를 넣어줍니다
+        //  다음에 사용할 수 있도록 req 객체에 token과 user를 넣어준다.
         req.token = token;
         req.user = user;
       }
@@ -166,6 +162,7 @@ router.post("/auth", jwtMiddleware, async (req, res) => {
       id: req.user.id,
       name: req.user.name,
     });
+    res.send(cookie);
 });
 
 router.post("/logout", jwtMiddleware, (req, res) => {
