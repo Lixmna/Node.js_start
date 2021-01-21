@@ -26,7 +26,7 @@ require('./config/passport')(passport);
 
 // 라우팅 파트
 
-var router = require('./routes/api/users')(app, fs);
+app.use('/api/users', users);
 
 app.listen(5000, (req, res) => {
     console.log("서버 실행중..");
