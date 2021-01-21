@@ -62,7 +62,7 @@ app.use(session({
     saveUninitialized: true
 }));*/
 
-app.use(session({sessionOption}));
+app.use(session({sessionOption, secret : '@#@$MYSIGN#@$#$'}));
 
 client.on('error', function (err) {
     console.log('Error ' + err);
