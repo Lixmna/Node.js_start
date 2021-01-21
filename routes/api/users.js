@@ -8,6 +8,8 @@ const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 
+const passport = require('passport');
+
 router.get('/', (req, res) => {
     res.send("패스포트 모듈 테스트");
 });
@@ -79,6 +81,14 @@ router.post('/login', (req, res) => {
                     }
                 });
         })
+});
+
+router.get('/current', passport.authenticate('jwt', { session: false}), (req, res) => {
+    res.json({
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email,
+    });
 });
 
 module.exports = router;
