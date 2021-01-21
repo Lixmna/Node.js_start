@@ -1,5 +1,21 @@
 const { json } = require("body-parser");
 
+var redis = require('./redis.js');
+
+app.use(session({
+    store: new RedisStore({
+        client: redis,
+        host: 'localhost',
+        port: 6379,
+        prefix : "session:",
+        db : 0,
+        saveUninitialized: false,
+        resave: false
+    }),
+    secret: '@#@$MYSIGN#@$#$',
+    cookie: { maxAge: 2592000000 }
+}));
+
 module.exports = function(app, fs)
 {
     app.get('/',function(req,res) {
