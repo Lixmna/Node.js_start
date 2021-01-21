@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const bcrypt = require("bcryptjs");
+const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const { User } = require("./models/User");
@@ -25,7 +25,7 @@ app.post("/login", (req, res) => {
       // email이 맞으니 pw가 일치하는지 검증합니다.
       if (user) {
         const checkPW = () => {
-          bcrypt.compare(req.body.password, user.password, (error, isMatch) => {
+          bcryptjs.compare(req.body.password, user.password, (error, isMatch) => {
             if (error) {
               return res.status(500).json({ error: "something wrong" });
             }
