@@ -30,8 +30,7 @@ const client = redis.createClient({
 
 const sessionOption = { resave: false,
      saveUninitialized: false,
-      secret: process.env.COOKIE_SECRET,
-        saveUninitialized: true,
+      secret: sessionSecret,
        cookie: { httpOnly: true, secure: false },
         store: new RedisStore({ client }) 
 };
