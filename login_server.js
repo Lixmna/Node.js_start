@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var cors = require('cors');
 
 // 초기화 파트
 const app = express();
