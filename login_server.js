@@ -9,6 +9,8 @@ const users = require('./routes/api/users');
 const cookieParser = require('cookie-parser');
 
 // 미들웨어 설정 파트
+app.use(cors());
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());

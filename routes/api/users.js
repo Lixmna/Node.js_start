@@ -14,32 +14,6 @@ router.get('/', (req, res) => {
     res.send("패스포트 모듈 테스트");
 });
 
-router.route('/process/setUserCookie').get(
-    function (req, res)
-    {
-        console.log('/process/setUserCookie : 라우팅 함수 호출 ');
- 
-        //웹서버에서 웹 브라우저에 저장할 정보를 세팅한다
-        res.cookie(
-            'user', { id: '1004', name: 'kim', authorized: true }
-        );
-        res.redirect('/process/showCookie');    //페이지 리다이렉트
-    }
-);
- 
- 
-// 웹브라우저에서 서버쪽에 어떤 요청을 할대 갖고 있는 쿠키정보를 넘겨준다, 이 정보는 req,cookies 에서 확인할 수 있다
-router.route('/process/showCookie').get(
-    function (req, res) {
-        console.log('/process/showCookie : 라우팅 함수 호출 ');
- 
-        //req.cookies 이것은 서버에 있는 것이 아닌 클라에서 요청했을때 넘어온 req 객체에 있는  웹브라우저 쿠키 정보이다
-        //즉 클라이언트에서 서버 접속시 브라우저에서 보내준 정보인데 이것을 사전에 값을 세팅하여 다시 클라로 보내
-        //해당 내용을 저장하라고 send 할 수 있다
-        res.send(req.cookies);
-    }
-);
-
 router.post('/register', (req, res) => {
     User.findOne({ email: req.body.email })
         .then(user => {
